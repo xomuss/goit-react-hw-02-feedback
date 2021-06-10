@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import Statistics from '../Feedback/Statistics'
 
 class Feedback extends Component {
     static defaultProps = {
@@ -41,11 +41,9 @@ class Feedback extends Component {
                     <button type="button" onClick={this.badIncrement}>Bad</button>
                 </div>
                 <h2>Statistics</h2>
-                <ul>
-                    <li>Good: {good}</li>
-                    <li>Neutral: {neutral}</li>
-                    <li>Bad: {bad}</li>
-                </ul>
+
+                <Statistics good={good} neutral={neutral} bad={bad} />
+
                 <div>
                     <p>TotalFeedback: {countTotalFeedback}</p>
                     {countPositiveFeedbackPercentage > 0 ? <p>Positive feedback: {countPositiveFeedbackPercentage}%</p> : <p>Positive feedback: 0%</p>}
