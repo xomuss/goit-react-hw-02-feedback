@@ -2,7 +2,13 @@ import React, { Component } from 'react'
 
 
 class Feedback extends Component {
+    static defaultProps = {
 
+    }
+
+    static propTypes = {
+
+    }
 
     state = this.props.initialState
 
@@ -22,12 +28,10 @@ class Feedback extends Component {
         }))
     }
 
-    countTotalFeedback = () => {
-
-    }
-
     render() {
         const { good, neutral, bad } = this.state
+        const countTotalFeedback = good + bad + neutral
+        const countPositiveFeedbackPercentage = Math.round(good / countTotalFeedback * 100)
         return (
             <>
                 <h1>Please leave feadback</h1>
@@ -42,6 +46,10 @@ class Feedback extends Component {
                     <li>Neutral: {neutral}</li>
                     <li>Bad: {bad}</li>
                 </ul>
+                <div>
+                    <p>TotalFeedback: {countTotalFeedback}</p>
+                    {countPositiveFeedbackPercentage > 0 ? <p>Positive feedback: {countPositiveFeedbackPercentage}%</p> : <p>Positive feedback: 0%</p>}
+                </div>
             </>
         )
     }
