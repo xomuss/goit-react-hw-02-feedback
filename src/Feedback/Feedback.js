@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Statistics from '../Feedback/Statistics';
 import FeedbackOptions from './FeedbackOptions';
+import SectionTitle from './SectionTitle';
+import Notification from './Notification';
 
 class Feedback extends Component {
   static defaultProps = {};
@@ -33,26 +35,27 @@ class Feedback extends Component {
     );
     return (
       <>
-        <h1>Please leave feadback</h1>
-
+        <SectionTitle title="Please leave feadback" />
         <FeedbackOptions
           options={['good', 'neutral', 'bad']}
-          onLeaveFeedback={lable}
+          onLeaveFeedback={[
+            this.goodIncrement,
+            this.badIncrement,
+            this.neutralIncrement,
+          ]}
         />
 
-        <h2>Statistics</h2>
-
-        <Statistics good={good} neutral={neutral} bad={bad} />
-
-        <div>
-          <p>TotalFeedback: {countTotalFeedback}</p>
-
-          {countPositiveFeedbackPercentage > 0 ? (
-            <p>Positive feedback: {countPositiveFeedbackPercentage}%</p>
-          ) : (
-            <p>Positive feedback: 0%</p>
-          )}
-        </div>
+        {countTotalFeedback === 0 ? (
+          <Notification message="No feedback given" />
+        ) : (
+          <Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            positivePercentage={countPositiveFeedbackPercentage}
+            totalFeedback={countTotalFeedback}
+          />
+        )}
       </>
     );
   }
